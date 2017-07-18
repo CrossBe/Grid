@@ -31,7 +31,7 @@ public class Tile implements Drawable{
      */
     public void draw(Graphics g) {
         g.setColor(getColor());
-        g.fillRect(getX() - 5, getY() - 5, 2 * 5, 2 * 5);
+        g.fillRect(getX()*5, getY()*5, 5, 5);
     }
 
     /**
