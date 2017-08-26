@@ -22,6 +22,7 @@ public class Tile implements Drawable{
 	public int getY(){
 		return location.y;
 	}
+	
 	// === Implementation of the Drawable interface ===
 
     /**
@@ -31,7 +32,7 @@ public class Tile implements Drawable{
      */
     public void draw(Graphics g) {
         g.setColor(getColor());
-        g.fillRect(getX()*5, getY()*5, 5, 5);
+        g.fillRect(getX()*50, getY()*50, 50, 50);
     }
 
     /**
