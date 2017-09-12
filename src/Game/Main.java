@@ -10,7 +10,7 @@ public class Main {
 		Visuals gamePlay = new Visuals(HEIGHT, WIDTH);
 		
 		frame.setBounds(10, 10, HEIGHT, WIDTH);
-		frame.setTitle("Game");
+		frame.setTitle("GRID");
 		frame.setResizable(false);
 		frame.setVisible(true);
 		frame.setLocationRelativeTo(null);

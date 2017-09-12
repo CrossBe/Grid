@@ -18,6 +18,8 @@ public class Tile implements Drawable{
 	
 	private boolean revealStats = true;
 	
+	private Character character;
+	
 	public Tile(int x, int y, int type){
 		this.x = x;
 		this.y = y;
@@ -27,6 +29,8 @@ public class Tile implements Drawable{
 		distance = 0;
 		visited = false;
 		path = null;
+		
+		character = null;
 	}
 	
 	public void select(){
@@ -59,6 +63,9 @@ public class Tile implements Drawable{
 		if(revealStats){
 			g.setColor(Color.white);
 	    	g.drawString("" + distance, x*50, (y*50)+10);
+		}
+		if(character != null){
+			character.draw(g);
 		}
 	}
 
