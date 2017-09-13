@@ -9,12 +9,16 @@ public class Plane implements Drawable{
 
 	private boolean visible;
 	
-	Tile[][] plane;
+	public Tile[][] plane;
 	
 	private int type;
 	
 	private int playerX = 1;
 	private int playerY = 1;
+	
+	int holdingX = -1;
+	int holdingY = -1;
+	boolean showHold = false;
 	
 	public Plane(){
 		type = Drawable.MULTI;
@@ -47,12 +51,50 @@ public class Plane implements Drawable{
 		plane[6][6].setType(Drawable.WALL);
 		
 		plane[playerX][playerY].select();
+		plane[playerX][playerY].setChar(new Character(plane[playerX][playerY]));
 		
 		setDistance(3, 4);
 	}
 	
+	public int getPlayerX() {
+		return playerX;
+	}
+
+	public int getPlayerY() {
+		return playerY;
+	}
+	
+	public void showDistance(boolean reveal){
+		for (int i = 0; i < plane.length; ++i) {
+			for (int k = 0; k < plane[i].length; ++k) {
+				plane[i][k].revealStats(reveal);
+			}
+		}
+	}
+	
 	// ===========================Player Control===========================
 
+	public void makeSelection(){
+		if(holdingX == -1 || holdingY == -1){
+			if(plane[playerX][playerY].getChar() != null){
+				showHold = true;
+				holdingX = playerX;
+				holdingY = playerY;
+				clearDistance();
+				setDistance(playerX, playerY);
+				showDistance(true);
+			}
+		}else{
+			if(plane[holdingX][holdingY].getChar().speed >= plane[playerX][playerY].getDistance()){
+				moveChar(holdingX, holdingY, playerX, playerY);
+				showHold = false;
+				holdingX = -1;
+				holdingY = -1;
+				showDistance(false);
+			}
+		}
+	}
+	
 	public void moveRight(){
 		if(playerX < 9){
 			plane[playerX][playerY].select();
@@ -82,6 +124,15 @@ public class Plane implements Drawable{
 		}
 	}
 	
+	private void moveChar(int fromX, int fromY, int toX, int toY){
+		Character character = plane[fromX][fromY].getChar();
+		if(character!=null){
+			character.setTile(plane[toX][toY]);
+			plane[fromX][fromY].setChar(null);
+			plane[toX][toY].setChar(character);
+		}
+	}
+	
 	// ===========================Math Type Stuff==========================
 	
 	public void clearDistance(){
@@ -91,7 +142,6 @@ public class Plane implements Drawable{
 			}
 		}
 	}
-	
 	
 	public void setDistance(int x, int y){
 		LinkedList<Tile> queue = new LinkedList<Tile>();
@@ -150,6 +200,9 @@ public class Plane implements Drawable{
 				plane[i][k].draw(g);
 			}
 		}
+		if(showHold){
+			g.drawString("Holding Char", 20, 20);
+		}
 	}
 
 	@Override
@@ -160,7 +213,7 @@ public class Plane implements Drawable{
 
 	@Override
 	public int getType() {return type;}
-
+	
 	@Override
 	public void setVisisble(boolean visible) {
 		this.visible = visible;

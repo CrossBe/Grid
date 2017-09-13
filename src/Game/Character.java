@@ -1,29 +1,36 @@
 package Game;
 
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
-import java.awt.image.ImageObserver;
+import java.io.File;
 
 import javax.imageio.ImageIO;
 
-public class Character implements Drawable, ImageObserver{
+public class Character implements Drawable{
 
 	BufferedImage image;
-	public Character(){
-		String file = "";
+	Tile tile;
+	public int speed = 10;
+	
+	public Character(Tile tile){
+		String file = "src/Resources/char.png";
+		this.tile = tile;
 		try{
 			image = ImageIO.read(
-					getClass().getResourceAsStream(file));
+					new File(file));
 		}catch(Exception e){
 			e.printStackTrace();
 		}
 	}
 	
+	public void setTile(Tile tile){
+		this.tile = tile;
+	}
+	
 	@Override
 	public void draw(Graphics g) {
-		g.drawImage(image, 0, 0, this);
+		g.drawImage(image, tile.x*50, tile.y*50, null);
 	}
 
 	@Override
@@ -61,11 +68,4 @@ public class Character implements Drawable, ImageObserver{
 		// TODO Auto-generated method stub
 		return false;
 	}
-
-	@Override
-	public boolean imageUpdate(Image img, int infoflags, int x, int y, int width, int height) {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
 }

@@ -33,12 +33,23 @@ public class Tile implements Drawable{
 		character = null;
 	}
 	
+	public void revealStats(boolean reveal){
+		this.revealStats = reveal;
+	}
+	
 	public void select(){
 		if(selected){
 			selected = false;
 		}else{
 			selected = true;
 		}
+	}
+	
+	public int getDistance(){
+		if(type == Drawable.WALL){
+			return 50;
+		}
+		return distance;
 	}
 	
 	//===========================Overrides================================
@@ -55,20 +66,28 @@ public class Tile implements Drawable{
 		g.drawRect(x*50, y*50, 50, 50);
 		if(selected){
 			g.setColor(Color.BLUE);
-			g.fillRect(x*50, y*50, 5, 50);//Left
-			g.fillRect(x*50, y*50, 50, 5);//UP
-			g.fillRect(x*50, ((y+1)*50)-5, 50, 5);//Down
-			g.fillRect(((x+1)*50)-5, y*50, 5, 50);//Right
+			g.fillRect(x*50, y*50, 5, 50);
+			g.fillRect(x*50, y*50, 50, 5);
+			g.fillRect(x*50, ((y+1)*50)-5, 50, 5);
+			g.fillRect(((x+1)*50)-5, y*50, 5, 50);
 		}
-		if(revealStats){
+		if(revealStats && type == Drawable.SPACE){
 			g.setColor(Color.white);
-	    	g.drawString("" + distance, x*50, (y*50)+10);
+	    	g.drawString("" + getDistance(), x*50, (y*50)+10);
 		}
 		if(character != null){
 			character.draw(g);
 		}
 	}
 
+	public void setChar(Character character){
+		this.character = character;
+	}
+	
+	public Character getChar(){
+		return character;
+	}
+	
 	@Override
 	public void move(int x, int y) {}
 

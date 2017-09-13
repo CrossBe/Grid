@@ -39,9 +39,6 @@ public class Visuals extends JPanel implements KeyListener, ActionListener {
 		timer = new Timer(delay, this);
 		timer.start();
 		
-		
-		
-		
 		layers = new ArrayList<Drawable>();
 		plane = new Plane();
 		layers.add(plane);
@@ -53,13 +50,9 @@ public class Visuals extends JPanel implements KeyListener, ActionListener {
 		}
 		g.dispose();
 	}
-
 	// ===========================Overrides================================
 	@Override
-	public void actionPerformed(ActionEvent e) {
-		timer.start();
-		repaint();
-	}
+	public void actionPerformed(ActionEvent e) {}
 
 	@Override
 	public void keyTyped(KeyEvent e) {}
@@ -80,6 +73,10 @@ public class Visuals extends JPanel implements KeyListener, ActionListener {
 		}
 		if (e.getKeyCode() == KeyEvent.VK_DOWN){
 			plane.moveDown();
+			repaint();
+		}
+		if (e.getKeyCode() == KeyEvent.VK_SPACE){
+			plane.makeSelection();
 			repaint();
 		}
 	}

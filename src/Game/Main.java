@@ -7,7 +7,7 @@ public class Main {
 	
 	public static void main(String[] args) {
 		JFrame frame = new JFrame();
-		Visuals gamePlay = new Visuals(HEIGHT, WIDTH);
+		Visuals visuals = new Visuals(HEIGHT, WIDTH);
 		
 		frame.setBounds(10, 10, HEIGHT, WIDTH);
 		frame.setTitle("GRID");
@@ -16,9 +16,8 @@ public class Main {
 		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		frame.add(gamePlay);
+		frame.add(visuals);
 		
 		frame.pack();
 	}
-
 }
