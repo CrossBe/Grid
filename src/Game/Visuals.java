@@ -3,28 +3,18 @@ package Game;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.ArrayList;
 
 import javax.swing.JPanel;
-import javax.swing.Timer;
 
-@SuppressWarnings("serial")
-public class Visuals extends JPanel implements KeyListener, ActionListener {
+public class Visuals extends JPanel implements KeyListener{
 
-	private boolean play;
-	
-	ArrayList<Drawable> layers;
-
-	private Timer timer;
-	private int delay = 8;
-
+	private static final long serialVersionUID = -4054101857266828615L;
 	private int HEIGHT;
 	private int WIDTH;
 	
-	Plane plane;
+	GameStateManager gsm;
 
 	public Visuals(int h, int w) {
 		HEIGHT = h;
@@ -35,23 +25,14 @@ public class Visuals extends JPanel implements KeyListener, ActionListener {
 		setFocusTraversalKeysEnabled(false);
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		
-		play = false;
-		timer = new Timer(delay, this);
-		timer.start();
-		
-		layers = new ArrayList<Drawable>();
-		plane = new Plane();
-		layers.add(plane);
+		gsm =  new GameStateManager();
 	}
 
 	public void paint(Graphics g) {
-		for(int i = 0; i < layers.size(); ++i){
-			layers.get(i).draw(g);
-		}
+		gsm.draw(g);
 		g.dispose();
 	}
 	// ===========================Overrides================================
-	@Override
 	public void actionPerformed(ActionEvent e) {}
 
 	@Override
@@ -60,23 +41,23 @@ public class Visuals extends JPanel implements KeyListener, ActionListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-			plane.moveRight();
+			gsm.rightKey();
 			repaint();
 		}
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-			plane.moveLeft();
+			gsm.leftKey();
 			repaint();
 		}
 		if (e.getKeyCode() == KeyEvent.VK_UP){
-			plane.moveUp();
+			gsm.upKey();
 			repaint();
 		}
 		if (e.getKeyCode() == KeyEvent.VK_DOWN){
-			plane.moveDown();
+			gsm.downKey();
 			repaint();
 		}
 		if (e.getKeyCode() == KeyEvent.VK_SPACE){
-			plane.makeSelection();
+			gsm.spaceKey();
 			repaint();
 		}
 	}

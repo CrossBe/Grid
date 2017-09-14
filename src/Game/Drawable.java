@@ -1,7 +1,6 @@
 package Game;
 
 import java.awt.Graphics;
-import java.awt.Point;
 
 public interface Drawable {
 
@@ -12,7 +11,8 @@ public interface Drawable {
 	
 	public void draw(Graphics g);
 	public void move(int x, int y);
-	public Point getXY();
+	public int getX();
+	public int getY();
 	
 	public int getType();
 	public void setType(int type);

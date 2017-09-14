@@ -2,7 +2,6 @@ package Game;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Point;
 
 public class Tile implements Drawable{
 
@@ -92,10 +91,11 @@ public class Tile implements Drawable{
 	public void move(int x, int y) {}
 
 	@Override
-	public Point getXY() {
-		return new Point(x, y);
-	}
-
+	public int getX() {return -1;}
+	
+	@Override
+	public int getY() {return -1;}
+	
 	@Override
 	public int getType() {
 		return type;

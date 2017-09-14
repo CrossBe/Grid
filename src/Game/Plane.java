@@ -1,8 +1,6 @@
 package Game;
 
 import java.awt.Graphics;
-import java.awt.Point;
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Plane implements Drawable{
@@ -52,8 +50,7 @@ public class Plane implements Drawable{
 		
 		plane[playerX][playerY].select();
 		plane[playerX][playerY].setChar(new Character(plane[playerX][playerY]));
-		
-		setDistance(3, 4);
+		showDistance(false);
 	}
 	
 	public int getPlayerX() {
@@ -145,6 +142,7 @@ public class Plane implements Drawable{
 	
 	public void setDistance(int x, int y){
 		LinkedList<Tile> queue = new LinkedList<Tile>();
+		plane[x][y].distance = -1;
 		plane[x][y].path = plane[x][y];
         queue.add(plane[x][y]);
         Tile selected;
@@ -209,7 +207,10 @@ public class Plane implements Drawable{
 	public void move(int x, int y) {}
 
 	@Override
-	public Point getXY() {return null;}
+	public int getX() {return -1;}
+	
+	@Override
+	public int getY() {return -1;}
 
 	@Override
 	public int getType() {return type;}

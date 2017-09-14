@@ -1,7 +1,6 @@
 package Game;
 
 import java.awt.Graphics;
-import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
@@ -40,11 +39,11 @@ public class Character implements Drawable{
 	}
 
 	@Override
-	public Point getXY() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	public int getX() {return -1;}
+	
+	@Override
+	public int getY() {return -1;}
+	
 	@Override
 	public int getType() {
 		// TODO Auto-generated method stub
