@@ -1,4 +1,4 @@
-# Grid
-Houses a random personal project
-
-Kinda like chess but with walls on the board
+# Interactive-A-Star
+Fun interactive A* program.
+## Installation
+Just open the project in eclipse or your preferred editor and run main.
